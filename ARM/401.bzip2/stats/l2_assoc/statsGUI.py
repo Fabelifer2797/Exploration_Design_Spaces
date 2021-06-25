@@ -14,7 +14,7 @@ writebacks = np.zeros(3)
 for i in range(3):
     rep = 2**(1+i)
     size.append(rep)
-    fileo = "stats"+str(rep)+".txt"
+    fileo = "ARM/401.bzip2/stats/l2_assoc/stats"+str(rep)+".txt"
     with open(fileo) as f:
         datafile = f.readlines()
     for line in datafile:

@@ -14,7 +14,7 @@ writebacks = np.zeros(10)
 for i in range(10):
     rep = 2**(1+i)
     size.append(rep)
-    fileo = "stats"+str(rep)+".txt"
+    fileo = "X86/458.sjeng/stats/l1i_assoc/stats"+str(rep)+".txt"
     with open(fileo) as f:
         datafile = f.readlines()
     for line in datafile:

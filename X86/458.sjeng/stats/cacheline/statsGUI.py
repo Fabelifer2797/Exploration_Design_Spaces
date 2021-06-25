@@ -14,7 +14,7 @@ hits2cache = []
 for i in range(5):
     rep = 2**(5+i)
     size.append(rep)
-    fileo = "stats"+str(rep)+".txt"
+    fileo = "X86/458.sjeng/stats/cacheline/stats"+str(rep)+".txt"
     with open(fileo) as f:
         datafile = f.readlines()
     for line in datafile:

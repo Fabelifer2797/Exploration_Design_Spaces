@@ -16,7 +16,7 @@ condIncorrect = []
 for i in range(3):
     rep = 2**(10+i)
     size.append(rep)
-    fileo = "stats"+str(rep)+".txt"
+    fileo = "ARM/401.bzip2/stats/BiModeBP/BTBEntries/stats"+str(rep)+".txt"
     with open(fileo) as f: #localPredictorSize
         datafile = f.readlines()
     for line in datafile:

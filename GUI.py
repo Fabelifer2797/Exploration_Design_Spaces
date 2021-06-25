@@ -4,13 +4,13 @@ import os
 
 root = tk.Tk()
 root.geometry("1100x500")
-root.title('Ejecutador de Benchmarks para SPEC y PARSEC')
+root.title('Exploración espacios de diseño con GEM5')
 v = tk.IntVar()
 v.set(1)  # initializing the choice, i.e. Python
 param = tk.IntVar()
 param.set(10)
 
-benchmarks = {1: '429.mcf', 2 : '456.hmmer', 3 : "458.sjeng", 4 : "blackscholes" ,  5 :"freqmine" , 6: "swaptions"}
+benchmarks = {1: '429.mcf', 2 : '456.hmmer', 3 : "458.sjeng", 4 : "401.bzip2" ,  5 :"429.mcf" , 6: "458.sjeng"}
 params = {10: 'cacheline', 11: 'l1d_assoc', 12 : "l1d_size", 13 : "l1i_assoc" ,  14 :"l1i_size" , 15: "l2_assoc", 16: "l2_size"}
 
 conBrachPredictor =  False
@@ -27,27 +27,27 @@ def ejecutar():
     if (conBrachPredictor):
         if (v.get() > 3):
             os.system(
-                "python3 PARSEC/" + benchmarks.get(v.get()) + "/stats/" +bpTypes.get(bp.get())+"/"+ bpData.get(bpD.get()) + "/graphics.py ")
+                "python3 ARM/" + benchmarks.get(v.get()) + "/stats/" +bpTypes.get(bp.get())+"/"+ bpData.get(bpD.get()) + "/statsGUI.py ")
         else:
             os.system(
-                "python3 SPEC/SPEC/" + benchmarks.get(v.get()) + "/stats/" +bpTypes.get(bp.get())+"/"+ bpData.get(bpD.get()) + "/graphics.py ")
+                "python3 X86/" + benchmarks.get(v.get()) + "/stats/" +bpTypes.get(bp.get())+"/"+ bpData.get(bpD.get()) + "/statsGUI.py ")
     else :
         if (v.get() > 3):
             os.system(
-                "python3 PARSEC/" + benchmarks.get(v.get()) + "/stats/" + params.get(param.get()) + "/graphics.py ")
+                "python3 ARM/" + benchmarks.get(v.get()) + "/stats/" + params.get(param.get()) + "/statsGUI.py ")
         else:
             os.system(
-                "python3 SPEC/SPEC/" + benchmarks.get(v.get()) + "/stats/" + params.get(param.get()) + "/graphics.py ")
+                "python3 X86/" + benchmarks.get(v.get()) + "/stats/" + params.get(param.get()) + "/statsGUI.py ")
 
 
 
-tk.Label(root, text="""Seleccione el Benchmark a Utilizar:""", justify = tk.RIGHT, padx = 20, font=("Courier", 10)).grid(row=0, column=1)
+tk.Label(root, text="""Seleccione el ISA que desea utilizar:""", justify = tk.RIGHT, padx = 20, font=("Courier", 10)).grid(row=0, column=1)
 
 row = 0
 i = row + 1
 
 columna = 0
-specLabel = tk.Label(root, text="SPEC:").grid(row=i, column=columna, sticky = tk.W)
+specLabel = tk.Label(root, text="X86:").grid(row=i, column=columna, sticky = tk.W)
 i = i + 1
 
 mcfRB = tk.Radiobutton(root,text="429.mcf", padx = 20, variable=v, command=ShowChoice, value=1,).grid(row=i, column=columna, sticky = tk.W)
@@ -61,17 +61,17 @@ i = i + 1
 
 j = row + 1
 columna = 2
-parsecLabel = tk.Label(root, text="PARSEC:").grid(row=j, column=columna, sticky = tk.W)
+parsecLabel = tk.Label(root, text="ARM:").grid(row=j, column=columna, sticky = tk.W)
 
 j =j+ 1
 
-blackscholesRB = tk.Radiobutton(root,text="blackscholes", padx = 20, variable=v, command=ShowChoice, value=4).grid(row=j, column=columna, sticky = tk.W)
+blackscholesRB = tk.Radiobutton(root,text="401.bzip2", padx = 20, variable=v, command=ShowChoice, value=4).grid(row=j, column=columna, sticky = tk.W)
 j =j+ 1
 #print(i)
-freqmine = tk.Radiobutton(root,text="freqmine", padx = 20, variable=v, command=ShowChoice,value=5).grid(row=j, column=columna, sticky = tk.W)
+freqmine = tk.Radiobutton(root,text="429.mcf", padx = 20, variable=v, command=ShowChoice,value=5).grid(row=j, column=columna, sticky = tk.W)
 j =j+ 1
 #print(i)
-swaptions = tk.Radiobutton(root,text="swaptions", padx = 20, variable=v, command=ShowChoice,value=6).grid(row=j, column=columna, sticky = tk.W)
+swaptions = tk.Radiobutton(root,text="458.sjeng", padx = 20, variable=v, command=ShowChoice,value=6).grid(row=j, column=columna, sticky = tk.W)
 j =j+ 1
 
 
