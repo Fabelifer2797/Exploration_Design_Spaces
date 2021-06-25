@@ -1,12 +1,18 @@
 import tkinter as tk
 import os
-#sudo apt-get install python3-tk
+from typing import Text
+from PIL import Image, ImageTk
+
 
 root = tk.Tk()
-root.geometry("1100x500")
+root.geometry("1100x600")
 root.title('Exploración espacios de diseño con GEM5')
+root.configure(background="gray26")
+image = Image.open('1.png').resize((200,200))
+photo_image = ImageTk.PhotoImage(image)
+labelI = tk.Label(root, image = photo_image)
 v = tk.IntVar()
-v.set(1)  # initializing the choice, i.e. Python
+v.set(1)  
 param = tk.IntVar()
 param.set(10)
 
@@ -41,74 +47,74 @@ def ejecutar():
 
 
 
-tk.Label(root, text="""Seleccione el ISA que desea utilizar:""", justify = tk.RIGHT, padx = 20, font=("Courier", 10)).grid(row=0, column=1)
+tk.Label(root, text="""Seleccione el ISA que desea probar\n con los benchmarks de SPEC:""", justify = tk.LEFT, padx = 5,background="gray26", fg="white", font=("Courier bold", 12)).grid(row=0, column=0)
 
 row = 0
-i = row + 1
+i = row + 2
 
 columna = 0
-specLabel = tk.Label(root, text="X86:").grid(row=i, column=columna, sticky = tk.W)
+specLabel = tk.Label(root, text="X86:", background="gray26", fg="white").grid(row=i, column=columna, sticky = tk.W)
 i = i + 1
 
-mcfRB = tk.Radiobutton(root,text="429.mcf", padx = 20, variable=v, command=ShowChoice, value=1,).grid(row=i, column=columna, sticky = tk.W)
-i = i + 1
-#print(i)
-hmmerRB=tk.Radiobutton(root,text="456.hmmer", padx = 20, variable=v, command=ShowChoice,value=2, ).grid(row=i, column=columna, sticky = tk.W)
-i = i + 1
-#print(i)
-sjengRB = tk.Radiobutton(root,text="458.sjeng", padx = 20, variable=v, command=ShowChoice,value=3).grid(row=i, column=columna, sticky = tk.W)
+mcfRB = tk.Radiobutton(root,text="429.mcf",background="gray26", fg="white", padx = 20, variable=v, command=ShowChoice, value=1,).grid(row=i, column=columna, sticky = tk.W)
 i = i + 1
 
-j = row + 1
+hmmerRB=tk.Radiobutton(root,text="456.hmmer",background="gray26", fg="white", padx = 20, variable=v, command=ShowChoice,value=2, ).grid(row=i, column=columna, sticky = tk.W)
+i = i + 1
+
+sjengRB = tk.Radiobutton(root,text="458.sjeng",background="gray26", fg="white", padx = 20, variable=v, command=ShowChoice,value=3).grid(row=i, column=columna, sticky = tk.W)
+i = i + 1
+
+j = row + 2
 columna = 2
-parsecLabel = tk.Label(root, text="ARM:").grid(row=j, column=columna, sticky = tk.W)
+parsecLabel = tk.Label(root, text="ARM:",background="gray26", fg="white").grid(row=j, column=columna, sticky = tk.W)
 
 j =j+ 1
 
-blackscholesRB = tk.Radiobutton(root,text="401.bzip2", padx = 20, variable=v, command=ShowChoice, value=4).grid(row=j, column=columna, sticky = tk.W)
+blackscholesRB = tk.Radiobutton(root,text="401.bzip2", background="gray26", fg="white", padx = 20, variable=v, command=ShowChoice, value=4).grid(row=j, column=columna, sticky = tk.W)
 j =j+ 1
-#print(i)
-freqmine = tk.Radiobutton(root,text="429.mcf", padx = 20, variable=v, command=ShowChoice,value=5).grid(row=j, column=columna, sticky = tk.W)
+
+freqmine = tk.Radiobutton(root,text="429.mcf",background="gray26", fg="white", padx = 20, variable=v, command=ShowChoice,value=5).grid(row=j, column=columna, sticky = tk.W)
 j =j+ 1
-#print(i)
-swaptions = tk.Radiobutton(root,text="458.sjeng", padx = 20, variable=v, command=ShowChoice,value=6).grid(row=j, column=columna, sticky = tk.W)
-j =j+ 1
+
+swaptions = tk.Radiobutton(root,text="458.sjeng",background="gray26", fg="white", padx = 20, variable=v, command=ShowChoice,value=6).grid(row=j, column=columna, sticky = tk.W)
+j =j+ 4
 
 
 
-tk.Label(root, text="""Seleccione el parametro que quiere variar:""", justify = tk.RIGHT, padx = 20, font=("Courier", 10)).grid(row=j, column=0, sticky = tk.W)
-j = j + 1
+tk.Label(root, text="""Seleccione el parámetro que desea variar:""",background="gray26", fg="white", justify = tk.RIGHT, padx = 20, font=("Courier bold", 10)).grid(row=j, column=0, sticky = tk.W)
+j = j + 2
 
 columnaAtributos = 0
-l1dzRB = tk.Radiobutton(root,text="l1d_size", padx = 20, variable=param, command=ShowParam,value=12,)
+l1dzRB = tk.Radiobutton(root,text="SIZE::Caché L1 de Datos",background="gray26", fg="white", padx = 20, variable=param, command=ShowParam,value=12,)
 l1dzRB.grid(row=j, column=columnaAtributos, sticky = tk.W)
 columnaAtributos = columnaAtributos + 1
 
-l1isRB = tk.Radiobutton(root,text="l1i_size", padx = 20, variable=param, command=ShowParam,value=14,)
+l1isRB = tk.Radiobutton(root,text="SIZE::Caché L1 de Instrucciones", background="gray26", fg="white", padx = 20, variable=param, command=ShowParam,value=14,)
 l1isRB.grid(row=j, column=columnaAtributos, sticky = tk.W)
 columnaAtributos = columnaAtributos + 1
 
-l2sRB = tk.Radiobutton(root,text="l2_size", padx = 20, variable=param, command=ShowParam,value=16,)
+l2sRB = tk.Radiobutton(root,text="SIZE::Caché L2",background="gray26", fg="white", padx = 20, variable=param, command=ShowParam,value=16,)
 l2sRB.grid(row=j, column=columnaAtributos, sticky = tk.W)
 columnaAtributos = columnaAtributos + 1
 
 j = j + 1
 columnaAtributos = 0
-l1dassRB = tk.Radiobutton(root,text="l1d_assoc", padx = 20, variable=param, command=ShowParam,value=11,)
+l1dassRB = tk.Radiobutton(root,text="ASSOC::Caché L1 de Datos", background="gray26", fg="white", padx = 20, variable=param, command=ShowParam,value=11,)
 l1dassRB.grid(row=j, column=columnaAtributos, sticky = tk.W)
 columnaAtributos = columnaAtributos + 1
 
-l1iassRB = tk.Radiobutton(root,text="l1i_assoc", padx = 20, variable=param, command=ShowParam,value=13,)
+l1iassRB = tk.Radiobutton(root,text="ASSOC::Caché L1 de Instrucciones",background="gray26", fg="white", padx = 20, variable=param, command=ShowParam,value=13,)
 l1iassRB.grid(row=j, column=columnaAtributos, sticky = tk.W)
 columnaAtributos = columnaAtributos + 1
 
-l2assRB = tk.Radiobutton(root,text="l2_assoc", padx = 20, variable=param, command=ShowParam,value=15,)
+l2assRB = tk.Radiobutton(root,text="ASSOC::Caché L2",background="gray26", fg="white", padx = 20, variable=param, command=ShowParam,value=15,)
 l2assRB.grid(row=j, column=columnaAtributos, sticky = tk.W)
 columnaAtributos = columnaAtributos + 1
 
 j = j + 1
 columnaAtributos = 1
-cachelineRB = tk.Radiobutton(root,text="cacheline", padx = 20, variable=param, command=ShowParam,value=10,)
+cachelineRB = tk.Radiobutton(root,text="SIZE::Cacheline",background="gray26", fg="white", padx = 20, variable=param, command=ShowParam,value=10,)
 cachelineRB.grid(row=j, column=columnaAtributos, sticky = tk.W)
 columnaAtributos = columnaAtributos + 1
 
@@ -119,10 +125,10 @@ paramsRB = [l1dzRB,l1isRB, l2sRB, l1dassRB, l1iassRB, l2assRB, cachelineRB]
 
 
 
-j = j + 1
+j = j + 5
 
 bpTypes = {201: 'Sin Branch Predictor', 202 : 'BiModeBP', 203 : "LocalBP", 204 : "TournamentBP" }
-tk.Label(root, text="""Seleccione una opción de BP:""", justify = tk.RIGHT, padx = 20, font=("Courier", 10)).grid(row=j, column=0, sticky = tk.W)
+tk.Label(root, text="""Seleccione una opción de BP:""",background="gray26", fg="white", justify = tk.RIGHT, padx = 20, font=("Courier bold", 10)).grid(row=j, column=0, sticky = tk.W)
 
 j = j + 1
 
@@ -151,20 +157,20 @@ def ShowBP():
         for item in datBP:
             #print(item)
             item.config(state='disable')
-tk.Radiobutton(root,text="Sin Branch Predictor", padx = 20, variable=bp, command=ShowBP,value=201,).grid(row=j, column=columnaAtributos, sticky = tk.W)
+tk.Radiobutton(root,text="Sin Branch Predictor",background="gray26", fg="white", padx = 20, variable=bp, command=ShowBP,value=201,).grid(row=j, column=columnaAtributos, sticky = tk.W)
 
 
 columnaAtributos = columnaAtributos + 1
 
-tk.Radiobutton(root,text="LocalBP", padx = 20, variable=bp, command=ShowBP,value=203,).grid(row=j, column=columnaAtributos, sticky = tk.W)
+tk.Radiobutton(root,text="LocalBP", background="gray26", fg="white",padx = 20, variable=bp, command=ShowBP,value=203,).grid(row=j, column=columnaAtributos, sticky = tk.W)
 
 columnaAtributos = columnaAtributos + 1
 
-tk.Radiobutton(root,text="TournamentBP", padx = 20, variable=bp, command=ShowBP,value=204,).grid(row=j, column=columnaAtributos, sticky = tk.W)
+tk.Radiobutton(root,text="TournamentBP",background="gray26", fg="white", padx = 20, variable=bp, command=ShowBP,value=204,).grid(row=j, column=columnaAtributos, sticky = tk.W)
 
 columnaAtributos = columnaAtributos + 1
 
-tk.Radiobutton(root,text="BiModeBP", padx = 20, variable=bp, command=ShowBP,value=202,).grid(row=j, column=columnaAtributos, sticky = tk.W)
+tk.Radiobutton(root,text="BiModeBP",background="gray26", fg="white", padx = 20, variable=bp, command=ShowBP,value=202,).grid(row=j, column=columnaAtributos, sticky = tk.W)
 j = j + 1
 
 
@@ -173,26 +179,26 @@ j = j + 1
 bpData = {301: 'BTBEntries', 302 : 'choicePredictorSize', 303 : "globalPredictorSize", 304 : "localPredictorSize" }
 bpD = tk.IntVar()
 bpD.set(301)
-tk.Label(root, text="""Seleccione el dato que quiere variar del BP:""", justify = tk.RIGHT, padx = 20, font=("Courier", 10)).grid(row=j, column=0, sticky = tk.W)
+tk.Label(root, text="""Seleccione el parámetro que desea variar del BP:""",background="gray26", fg="white", justify = tk.RIGHT, padx = 20, font=("Courier bold", 10)).grid(row=j, column=0, sticky = tk.W)
 
 
 def ShowBPData():
     return
 j = j + 1
 
-bbtRB = tk.Radiobutton(root,text="BTBEntries", padx = 20, variable=bpD, command=ShowBPData,value=301,)
+bbtRB = tk.Radiobutton(root,text="BTBEntries",background="gray26", fg="white", padx = 20, variable=bpD, command=ShowBPData,value=301,)
 bbtRB.grid(row=j, column=0, sticky = tk.W)
 j = j + 1
 
-choicePRB = tk.Radiobutton(root,text="choicePredictorSize", padx = 20, variable=bpD, command=ShowBPData,value=302,)
+choicePRB = tk.Radiobutton(root,text="choicePredictorSize", background="gray26", fg="white",padx = 20, variable=bpD, command=ShowBPData,value=302,)
 choicePRB.grid(row=j, column=0,sticky = tk.W)
 j = j + 1
 
-globalPRB = tk.Radiobutton(root,text="globalPredictorSize", padx = 20, variable=bpD, command=ShowBPData,value=303,)
+globalPRB = tk.Radiobutton(root,text="globalPredictorSize",background="gray26", fg="white", padx = 20, variable=bpD, command=ShowBPData,value=303,)
 globalPRB.grid(row=j, column=0, sticky = tk.W)
 j = j + 1
 
-localPRB = tk.Radiobutton(root,text="localPredictorSize", padx = 20, variable=bpD, command=ShowBPData,value=304,)
+localPRB = tk.Radiobutton(root,text="localPredictorSize",background="gray26", fg="white", padx = 20, variable=bpD, command=ShowBPData,value=304,)
 localPRB.grid(row=j, column=0, sticky = tk.W)
 j = j + 1
 
@@ -201,6 +207,8 @@ datBP = [bbtRB,choicePRB, globalPRB, localPRB]
 for item in datBP:
     item.config(state='disable')
 
-exitButton = tk.Button(root, text="Ejecutar", command=ejecutar, bg='red').grid(row=j, column=1, sticky = tk.W)
+exitButton = tk.Button(root, text="Ejecutar", command=ejecutar, bg='white').grid(row=j, column=0, sticky = tk.W)
+labelI.grid(row=25, column=1)
+
 
 root.mainloop()
