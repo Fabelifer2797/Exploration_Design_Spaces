@@ -16,7 +16,7 @@ condIncorrect = []
 for i in range(3):
     rep = 2**(10+i)
     size.append(rep)
-    fileo = "SPEC/SPEC/429.mcf/stats/BiModeBP/BTBEntries/stats"+str(rep)+".txt"
+    fileo = "stats"+str(rep)+".txt"
     with open(fileo) as f: #localPredictorSize
         datafile = f.readlines()
     for line in datafile:
@@ -26,10 +26,10 @@ for i in range(3):
         elif "system.cpu.branchPred.BTBLookups" in line:
             found = (re.search("([0-9]+)",line))
             BTBLookups.append(found[0])
-        elif "system.cpu.Branches" in line:
+        elif "system.cpu.exec_context.thread_0.numBranches" in line:
             found = (re.search("([0-9]+)",line))
             numBranches.append(found[0])
-        elif "system.cpu.BranchMispred" in line:
+        elif "system.cpu.exec_context.thread_0.numBranchMispred" in line:
             found = (re.search("([0-9]+)",line))
             BranchMispredPct.append(found[0])
         elif "system.cpu.branchPred.condPredicted" in line:
@@ -40,7 +40,7 @@ for i in range(3):
             condIncorrect.append(found[0])
 for i in range(3):
     BTBMissPCT.append((1-(int(BTBHits[i])/int(BTBLookups[i])))*100)
-    numbranchMispred.append((int(BranchMispredPct[i])/int(numBranches[i]))*100)
+    numbranchMispred.append((int(BranchMispredPct[i])/int(7987725))*100)
 
 
 fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2)

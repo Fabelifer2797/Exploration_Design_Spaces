@@ -8,23 +8,23 @@ hits = []
 numCycles = []
 insts = []
 CPI = []
-writebacks = np.zeros(10)
+writebacks = np.zeros(3)
 
 
 for i in range(3):
-    rep = 2**(7+i)
+    rep = 2**(1+i)
     size.append(rep)
     fileo = "stats"+str(rep)+".txt"
     with open(fileo) as f:
         datafile = f.readlines()
     for line in datafile:
-        if "system.cpu.dcache.overallMisses::total" in line:
+        if "system.cpu.icache.overallMisses::total" in line:
             found = (re.search("([0-9]+)",line))
             data.append(found[0])
-        elif "system.cpu.dcache.overallHits::total" in line:
+        elif "system.cpu.icache.overallHits::total" in line:
             found = (re.search("([0-9]+)",line))
             hits.append(found[0])
-        elif "system.cpu.dcache.writebacks::total" in line:
+        elif "system.cpu.icache.writebacks::total" in line:
             found = (re.search("([0-9]+)",line))
             writebacks[i] = found[0]
         elif "system.cpu.numCycles" in line:
@@ -47,7 +47,7 @@ ax2.legend(["Hits"])
 ax2.xaxis.set_ticks(np.arange(3))
 ax2.xaxis.set_ticklabels(size)
 ax3.plot(writebacks,'o-')
-ax3.legend(["WriteBack"])
+ax3.legend(["WriteBacks"])
 ax3.xaxis.set_ticks(np.arange(3))
 ax3.xaxis.set_ticklabels(size)
 ax4.plot(CPI,'o-')
